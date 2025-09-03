@@ -10,7 +10,7 @@ Readme — Style Rack Bd (e‑commerce Website)
 
 ## 🔗 লাইভ ডেমো 
 
-* Demo: `https://your-domain-or-github-pages-url`
+* Demo: https://codingwithmahim.github.io/Business_website/
 
 ## ✨ ফিচারস
 

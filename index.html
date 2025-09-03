@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style-Rake Bd - Premium Fashion Collection</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Welcome Popup -->
+    <div class="welcome-popup" id="welcomePopup">
+        <div class="welcome-content">
+            <div class="welcome-header">
+                <h2>🎉 স্বাগতম Style-Rake Bd তে!</h2>
+                <button class="close-welcome" onclick="closeWelcome()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p>প্রিমিয়াম ফ্যাশন কালেকশনে পাবেন সেরা মানের পোশাক</p>
+            <div class="welcome-offers">
+                <div class="offer-item">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>ফ্রি ডেলিভারি ১০০০+ টাকায়</span>
+                </div>
+                <div class="offer-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>১০০% অরিজিনাল প্রোডাক্ট</span>
+                </div>
+                <div class="offer-item">
+                    <i class="fas fa-undo-alt"></i>
+                    <span>৭ দিন রিটার্ন গ্যারান্টি</span>
+                </div>
+            </div>
+            <button class="shop-now-btn" onclick="closeWelcome(); scrollToProducts();">
+                এখনই কিনুন
+            </button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <div class="contact-info">
+                        <span><i class="fas fa-phone"></i> ০১৭১১-১২৩৪৫৬</span>
+                        <span><i class="fas fa-envelope"></i> info@stylerakebd.com</span>
+                    </div>
+                    <div class="top-bar-offers">
+                        <span><i class="fas fa-fire"></i> ৫০% পর্যন্ত ছাড়!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="logo">
+                        <img src="img/logo.png" alt="Style-Rake Bd" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="logo-text">
+                            <span class="brand-name">Style-Rake</span>
+                            <span class="brand-tagline">Bd</span>
+                        </div>
+                    </div>
+
+                    <div class="search-container">
+                        <div class="search-wrapper">
+                            <input type="text" class="search-input" placeholder="পোশাক, ব্র্যান্ড বা ক্যাটাগরি খুঁজুন..." id="searchInput">
+                            <button class="search-btn" onclick="performSearch()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <div class="search-suggestions" id="searchSuggestions"></div>
+                        </div>
+                    </div>
+
+                    <div class="nav-actions">
+                        <button class="nav-btn wishlist-btn" title="পছন্দের তালিকা">
+                            <i class="far fa-heart"></i>
+                            <span class="count" id="wishlistCount">0</span>
+                        </button>
+                        <button class="nav-btn cart-btn" onclick="toggleCart()" title="শপিং কার্ট">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="count" id="cartCount">0</span>
+                        </button>
+                        <button class="nav-btn user-btn" onclick="openLoginModal()" title="লগইন">
+                            <i class="far fa-user"></i>
+                        </button>
+                        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Category Navigation -->
+        <div class="category-nav">
+            <div class="container">
+                <ul class="category-menu">
+                    <li class="menu-item">
+                        <a href="#home" class="menu-link">
+                            <i class="fas fa-home"></i>
+                            <span>হোম</span>
+                        </a>
+                    </li>
+                    <li class="menu-item dropdown">
+                        <a href="#" class="menu-link" onclick="filterProducts('mens')">
+                            <i class="fas fa-male"></i>
+                            <span>পুরুষদের</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" onclick="filterProducts('mens', 'shirt')">শার্ট</a>
+                            <a href="#" onclick="filterProducts('mens', 'pant')">প্যান্ট</a>
+                            <a href="#" onclick="filterProducts('mens', 'tshirt')">টি-শার্ট</a>
+                            <a href="#" onclick="filterProducts('mens', 'kurta')">কুর্তা</a>
+                        </div>
+                    </li>
+                    <li class="menu-item dropdown">
+                        <a href="#" class="menu-link" onclick="filterProducts('womens')">
+                            <i class="fas fa-female"></i>
+                            <span>মহিলাদের</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#" onclick="filterProducts('womens', 'saree')">শাড়ি</a>
+                            <a href="#" onclick="filterProducts('womens', 'salwar')">সালোয়ার-কামিজ</a>
+                            <a href="#" onclick="filterProducts('womens', 'kurti')">কুর্তি</a>
+                            <a href="#" onclick="filterProducts('womens', 'dress')">ড্রেস</a>
+                        </div>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link" onclick="filterProducts('kids')">
+                            <i class="fas fa-child"></i>
+                            <span>শিশুদের</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" class="menu-link" onclick="filterProducts('accessories')">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>এক্সেসরিজ</span>
+                        </a>
+                    </li>
+                    <li class="menu-item sale-item">
+                        <a href="#" class="menu-link" onclick="filterProducts('sale')">
+                            <i class="fas fa-fire"></i>
+                            <span>সেল</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="hero-content">
+                    <div class="container">
+                        <div class="hero-text">
+                            <h1 class="hero-title">প্রিমিয়াম ফ্যাশন কালেকশন</h1>
+                            <p class="hero-subtitle">সর্বোচ্চ মানের পোশাক সবচেয়ে সাশ্রয়ী দামে</p>
+                            <div class="hero-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-star"></i>
+                                    <span>১০০% অরিজিনাল</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-shipping-fast"></i>
+                                    <span>দ্রুত ডেলিভারি</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>মানের গ্যারান্টি</span>
+                                </div>
+                            </div>
+                            <div class="hero-actions">
+                                <button class="cta-btn primary" onclick="scrollToProducts()">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    এখনই কিনুন
+                                </button>
+                                <button class="cta-btn secondary" onclick="filterProducts('sale')">
+                                    <i class="fas fa-fire"></i>
+                                    অফার দেখুন
+                                </button>
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            <div class="hero-product-showcase">
+                                <div class="product-card-hero">
+                                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400" alt="Fashion" onerror="this.style.display='none'">
+                                    <div class="product-info-hero">
+                                        <span class="discount-badge">৫০% ছাড়</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>দ্রুত ডেলিভারি</h3>
+                    <p>ঢাকায় ২৪ ঘন্টা, ঢাকার বাইরে ৪৮ ঘন্টা</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>সহজ রিটার্ন</h3>
+                    <p>৭ দিনের মধ্যে রিটার্ন ও এক্সচেঞ্জ</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>নিরাপদ পেমেন্ট</h3>
+                    <p>বিকাশ, নগদ, COD সব মাধ্যমে পেমেন্ট</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>২৪/৭ সাপোর্ট</h3>
+                    <p>যেকোনো সমস্যায় আমাদের সাথে যোগাযোগ করুন</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">আমাদের ক্যাটাগরি সমূহ</h2>
+                <p class="section-subtitle">আপনার পছন্দের পোশাক খুঁজে নিন</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterProducts('mens')">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300" alt="Mens Fashion" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="category-placeholder">
+                            <i class="fas fa-male"></i>
+                        </div>
+                    </div>
+                    <div class="category-info">
+                        <h3>পুরুষদের পোশাক</h3>
+                        <p>শার্ট, প্যান্ট, কুর্তা, টি-শার্ট</p>
+                        <span class="category-count">২০০+ আইটেম</span>
+                    </div>
+                </div>
+                <div class="category-card" onclick="filterProducts('womens')">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300" alt="Womens Fashion" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="category-placeholder">
+                            <i class="fas fa-female"></i>
+                        </div>
+                    </div>
+                    <div class="category-info">
+                        <h3>মহিলাদের পোশাক</h3>
+                        <p>শাড়ি, সালোয়ার-কামিজ, কুর্তি</p>
+                        <span class="category-count">১৫০+ আইটেম</span>
+                    </div>
+                </div>
+                <div class="category-card" onclick="filterProducts('kids')">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1503919005314-30d93d07d823?w=300" alt="Kids Fashion" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="category-placeholder">
+                            <i class="fas fa-child"></i>
+                        </div>
+                    </div>
+                    <div class="category-info">
+                        <h3>শিশুদের পোশাক</h3>
+                        <p>বেবি ড্রেস, স্কুল ইউনিফর্ম</p>
+                        <span class="category-count">৮০+ আইটেম</span>
+                    </div>
+                </div>
+                <div class="category-card" onclick="filterProducts('accessories')">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300" alt="Accessories" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="category-placeholder">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                    </div>
+                    <div class="category-info">
+                        <h3>এক্সেসরিজ</h3>
+                        <p>ব্যাগ, জুতা, বেল্ট, ওয়াচ</p>
+                        <span class="category-count">১০০+ আইটেম</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">সর্বশেষ কালেকশন</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterProducts('all')" data-filter="all">সব</button>
+                    <button class="filter-tab" onclick="filterProducts('mens')" data-filter="mens">পুরুষদের</button>
+                    <button class="filter-tab" onclick="filterProducts('womens')" data-filter="womens">মহিলাদের</button>
+                    <button class="filter-tab" onclick="filterProducts('kids')" data-filter="kids">শিশুদের</button>
+                    <button class="filter-tab" onclick="filterProducts('sale')" data-filter="sale">অফার</button>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here -->
+            </div>
+            <div class="load-more-container">
+                <button class="load-more-btn" onclick="loadMoreProducts()">
+                    <i class="fas fa-plus"></i>
+                    আরও দেখুন
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h3>নতুন কালেকশনের আপডেট পান</h3>
+                    <p>আমাদের নিউজলেটার সাবস্ক্রাইব করুন এবং বিশেষ অফার পান</p>
+                </div>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="আপনার ইমেইল দিন" id="newsletterEmail">
+                    <button class="subscribe-btn" onclick="subscribeNewsletter()">
+                        <i class="fas fa-paper-plane"></i>
+                        সাবস্ক্রাইব
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-text">
+                            <span class="brand-name">Style-Rake</span>
+                            <span class="brand-tagline">Bd</span>
+                        </div>
+                        <p>বাংলাদেশের নং ১ ফ্যাশন ই-কমার্স প্ল্যাটফর্ম</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>ক্যাটাগরি</h4>
+                    <ul>
+                        <li><a href="#">পুরুষদের পোশাক</a></li>
+                        <li><a href="#">মহিলাদের পোশাক</a></li>
+                        <li><a href="#">শিশুদের পোশাক</a></li>
+                        <li><a href="#">এক্সেসরিজ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>গ্রাহক সেবা</h4>
+                    <ul>
+                        <li><a href="#">যোগাযোগ</a></li>
+                        <li><a href="#">সাইজ গাইড</a></li>
+                        <li><a href="#">রিটার্ন পলিসি</a></li>
+                        <li><a href="#">প্রাইভেসি পলিসি</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>যোগাযোগ</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>০১৭১১-১২৩৪৫৬</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@stylerakebd.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>ঢাকা, বাংলাদেশ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ২০২৫ Style-Rake Bd. সমস্ত অধিকার সংরক্ষিত।</p>
+                <div class="payment-methods">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Bkash_logo.svg/100px-Bkash_logo.svg.png" alt="bKash" onerror="this.style.display='none'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Nagad_Logo.svg/100px-Nagad_Logo.svg.png" alt="Nagad" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> আপনার কার্ট</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-body">
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>আপনার কার্ট খালি</p>
+                    <button class="continue-shopping" onclick="toggleCart(); scrollToProducts();">কিনাকাটা শুরু করুন</button>
+                </div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <div class="total-row">
+                    <span>সাবটোটাল:</span>
+                    <span id="cartSubtotal">৳০</span>
+                </div>
+                <div class="total-row">
+                    <span>ডেলিভারি:</span>
+                    <span id="deliveryCharge">৳৬০</span>
+                </div>
+                <div class="total-row total">
+                    <span>মোট:</span>
+                    <span id="cartTotal">৳৬০</span>
+                </div>
+            </div>
+            <button class="checkout-btn" onclick="proceedToCheckout()">
+                <i class="fas fa-credit-card"></i>
+                চেকআউট
+            </button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>লগইন / সাইনআপ</h3>
+                <button class="close-modal" onclick="closeLoginModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form" id="authForm">
+                    <div class="form-group">
+                        <label>নাম</label>
+                        <input type="text" placeholder="আপনার নাম" id="userName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>মোবাইল নম্বর</label>
+                        <input type="tel" placeholder="০১xxxxxxxxx" id="userPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ইমেইল (ঐচ্ছিক)</label>
+                        <input type="email" placeholder="example@email.com" id="userEmail">
+                    </div>
+                    <button type="submit" class="auth-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        লগইন করুন
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>পেমেন্ট করুন</h3>
+                <button class="close-modal" onclick="closePaymentModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-methods" id="paymentMethods">
+                    <!-- Payment options will be loaded here -->
+                </div>
+                <div class="payment-details" id="paymentDetails">
+                    <!-- Payment details will be shown here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal-overlay" id="quickViewModal">
+        <div class="modal-container large">
+            <div class="modal-header">
+                <h3>পণ্যের বিস্তারিত</h3>
+                <button class="close-modal" onclick="closeQuickView()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="product-details" id="quickViewContent">
+                    <!-- Product details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <div class="notification-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="notification-text">
+                <span id="notificationMessage">Success message</span>
+            </div>
+            <button class="notification-close" onclick="closeNotification()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>লোড হচ্ছে...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
